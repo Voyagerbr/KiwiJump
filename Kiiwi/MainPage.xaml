@@ -3,6 +3,51 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Kiiwi.MainPage">
 
-    
+    <Grid>
+              <HorizontalStackLayout x:Name="layerUm">
+                     <Image Source="um.png"
+                            Aspect="AspectFill"/>
+                     <Image Source="um.png"
+                            Aspect="AspectFill"/>
+                     <Image Source="um.png"
+                            Aspect="AspectFill"/>
+              </HorizontalStackLayout>
+              <HorizontalStackLayout x:Name="layerDois">
+                     <Image Source="doi.png"/>
+                     <Image Source="doi.png"/>
+                     <Image Source="doi.png"/>
+              </HorizontalStackLayout>
+              <HorizontalStackLayout x:Name="layerTres">
+                     <Image Source="tres.png"/>
+                     <Image Source="tres.png"/>
+                     <Image Source="tres.png"/>
+              </HorizontalStackLayout>
+              <HorizontalStackLayout x:Name="layerQuatro">
+                     <Image Source="quatro.png"/>
+                     <Image Source="quatro.png"/>
+                     <Image Source="quatro.png"/>
+              </HorizontalStackLayout>
+              <HorizontalStackLayout x:Name="layerSemaforo">
+                     <Image Source="semaforo.png"
+                            HeightRequest="300"/>
+                     <Image Source="semaforo.png"
+                            HeightRequest="300"/>
+                     <Image Source="semaforo.png"
+                            HeightRequest="300"/>
+              </HorizontalStackLayout>
+              <HorizontalStackLayout x:Name="layerAsfalto">
+                     <Image Source="asfalto.jpeg"
+                            WidthRequest="400"
+                            VerticalOptions="End"/>
+                     <Image Source="asfalto.jpeg"
+                            WidthRequest="400"
+                            VerticalOptions="End"/>
+                     <Image Source="asfalto.jpeg"
+                            WidthRequest="400"
+                            VerticalOptions="End"/>
+              </HorizontalStackLayout>
+                     <Image Source="skyline.png"
+                            WidthRequest="200"/>
+       </Grid>
 
 </ContentPage>
