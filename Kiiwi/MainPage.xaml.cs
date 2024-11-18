@@ -4,117 +4,110 @@ public partial class MainPage : ContentPage
 {
 	double HeightWindow = 0;
 	double WidthtWindow = 0;
-	const int Velocity = 15;
-	const int Velocity1 = 15;
-	const int Velocity2 = 15;
-	const int Velocity3 = 15;
-	const int Velocity4 = 15;
-	const int Gravity = 5;
+ 	int Velocity = 0;
+	 int Velocity1 = 0;
+	 int Velocity2 = 0;
+	 int Velocity3 = 0;
+	 int Velocity4 = 0;
+	 int Gravity = 5;
 
 
-	const int TimeBeteweenFrames = 25;
+	 int TimeBeteweenFrames = 25;
 
 	bool IsDied = true;
-	const int JumpForce = 35;
-	const int maxJumpTime = 5;
+	 int JumpForce = 35;
+	 int maxJumpTime = 5;
 	bool IsJumping = false;
 	int JumpTime = 0;
-	const int minOpening = 100;
+	 int minOpening = 100;
 	int Score = 0;
 
 
 
+	Player player;
+
 	public MainPage()
 	{
 		InitializeComponent();
-	}
-
-	protected override void OnAppearing()
-	{
-		base.OnAppearing();
-		Desenha();
+		player = new Player(imgpersonagem);
+		player.Run();
 	}
 
 	async Task Desenha()
 	{
 		while (!IsDied)
 		{
-			ManageCenary();
+			GerenciaCenarios();
+			player.Desenha();
 			await Task.Delay(TimeBeteweenFrames);
 		}
 	}
 
-	protected override void OnSizeAllocated(double w, double h)
-	{
-		base.OnSizeAllocated(w, h);
-		CorrigeTamanhoCenario(w, h);
-		VelocityCalc(w);
-	}
+    protected override void OnSizeAllocated(double w, double h)
+    {
+        base.OnSizeAllocated(w, h);
+		CorrigeTamanhoCenario(w,h);
+		CalculaVelocity(w);
+    }
 
-	void VelocityCalc(double w)
+	protected override void OnAppearing()
 	{
-		Velocity1 = (int)(w * 0.001);
-		Velocity2 = (int)(w * 0.004);
-		Velocity3 = (int)(w * 0.007);
-		Velocity4 = (int)(w * .009);
+		base.OnAppearing();
+		Desenha();
+	}
+	
+	void CalculaVelocity(double w)
+	{
+		Velocity1=(int)(w*0.001);
+		Velocity2=(int)(w*0.004);
+		Velocity3=(int)(w*0.008);
 		Velocity = (int)(w * 0.01);
-	}
-
-	void ManageCenary()
-	{
-		MoveCenario();
-		GerenciaCenario(layerFundo);
-		GerenciaCenario(layerCidade);
-		GerenciaCenario(layerSemaforo);
-		GerenciaCenario(layerAsfalto);
 	}
 
 	void CorrigeTamanhoCenario(double w, double h)
 	{
-		foreach (var a in layerFundo.Children)
-			(a as Image).WidthRequest = w;
+		foreach(var a in layerFundo1.Children)
+		(a as Image ).WidthRequest = w;
+		foreach(var a in layerFundo2.Children)
+		(a as Image ).WidthRequest = w;
+		foreach(var a in layerFundo3.Children)
+		(a as Image ).WidthRequest = w;
+		foreach( var a in layerChao.Children)
+		(a as Image ).WidthRequest = w;
 
-		foreach (var a in layerCidade.Children)
-			(a as Image).WidthRequest = w;
-		
-		foreach (var a in layerSemaforo.Children)
-			(a as Image).WidthRequest = w;
-		
-		foreach (var a in layerAsfalto.Children)
-			(a as Image).WidthRequest = w;
+		layerFundo1.WidthRequest=w*1.5;
+		layerFundo2.WidthRequest=w*1.5;
+		layerFundo3.WidthRequest=w*1.5;
+		layerChao.WidthRequest=w*1.5;
+	}
 
-		layerFundo.WidthRequest = w * 1.5;
-		layerCidade.WidthRequest = w * 1.5;
-		layerSemaforo.WidthRequest = w * 1.5;
-		layerAsfalto.WidthRequest = w * 1.5;
+	void GerenciaCenarios()
+	{
+		MoveCenario();
+		GerenciaCenario(layerFundo1);
+		GerenciaCenario(layerFundo2);
+		GerenciaCenario(layerFundo3);
+		GerenciaCenario(layerChao);
 	}
 
 	void MoveCenario()
 	{
-		layerFundo.TranslationX -= velocidade1;
-		layerCidade.TranslationX -= velocidade2;
-		layerSemaforo.TranslationX -= velocidade3;
-		layerAsfalto.TranslationX -= velocidade;
+		layerFundo1.TranslationX -= Velocity1;
+		layerFundo2.TranslationX -= Velocity2;
+		layerFundo3.TranslationX -= Velocity3;
+		layerChao.TranslationX -= Velocity;
 	}
-
+	
 	void GerenciaCenario(HorizontalStackLayout hsl)
 	{
 		var view = (hsl.Children.First() as Image);
-
-		if(view.WidthRequest + hsl.TranslationX < 0)
+		if(view.WidthRequest+hsl.TranslationX<0)
 		{
 			hsl.Children.Remove(view);
 			hsl.Children.Add(view);
 			hsl.TranslationX = view.TranslationX;
 		}
-        
-    }
+	}
 
-
-
-
-
-
-
+	
 }
-
