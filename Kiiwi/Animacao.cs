@@ -1,56 +1,75 @@
+using FFImageLoading.Maui;
+
 namespace Kiiwi;
-public class Animacao
+
+public  class Animacao
 {
-    bool parado=true;
-	int frameAtual=1;
-    protected List <String> animacao1=new List<String>();
-	protected List <String> animacao2=new List<String>();
-	protected List <String> animacao3=new List<String>();
-	protected bool loop=true;
-	protected int animacaoAtiva=1;
-	protected Image compImagem; 
-    
-	public Animacao(Image a)
-	{
-		compImagem=a;
-	}
+    protected List<String> Animacao1 = new List<String>();
+    protected List<String> Animacao2 = new List<String>();
+    protected List<String> Animacao3 = new List<String>();
+    protected bool Loop = true;
+    protected int AnimacaoAtiva = 1;
+    bool Parado = true;
+    int FrameAtual = 1;
+    protected CachedImageView ImageView;
+
+    public Animacao(CachedImageView pp)
+    {
+        ImageView = pp;
+    }
+
     public void Stop()
     {
-        parado=true;
+        Parado = true;
     }
+
     public void Play()
     {
-        parado=false;
+        Parado = false;
     }
-    public void SetAnimacaoAtiva(int a)
+
+    public void SetAnimacaoAtiva(int pp)
     {
-        animacaoAtiva=a;
+        AnimacaoAtiva = pp;
     }
+
     public void Desenha()
     {
-        if(parado)
+        if (Parado)
+        {
             return;
-        string nomeArquivo = "";
-        int tamanhoanimacao = 0;
-        if(animacaoAtiva==1)
-        {
-            nomeArquivo= animacao1[frameAtual];
-            tamanhoanimacao=animacao1.Count;
         }
-        else if (animacaoAtiva==3)
+        string NomeArquivo = "";
+        int TamanhoAnimacao = 0;
+
+        if (AnimacaoAtiva == 1)
         {
-            nomeArquivo=animacao3[frameAtual];
-            tamanhoanimacao=animacao3.Count;
+            NomeArquivo = Animacao1[FrameAtual];
+            TamanhoAnimacao = Animacao1.Count;
         }
-        compImagem.Source=ImageSource.FromFile(nomeArquivo);
-        frameAtual++;
-        if(frameAtual >= tamanhoanimacao)
+        else if (AnimacaoAtiva == 2)
         {
-            if(loop)
-                frameAtual=0;
+            NomeArquivo = Animacao2[FrameAtual];
+            TamanhoAnimacao = Animacao2.Count;
+        }
+        else if (AnimacaoAtiva == 3)
+        {
+            NomeArquivo = Animacao3[FrameAtual];
+            TamanhoAnimacao = Animacao3.Count;
+        }
+
+        ImageView.Source = ImageSource.FromFile(NomeArquivo);
+        FrameAtual++;
+
+        if (FrameAtual >= TamanhoAnimacao)
+        {
+            if (Loop)
+            {
+                FrameAtual = 0;
+            }
             else
             {
-                parado=true;
+                Parado = true;
                 QuandoParar();
             }
         }
@@ -58,6 +77,6 @@ public class Animacao
 
     public virtual void QuandoParar()
     {
-
+     
     }
 }

@@ -1,4 +1,5 @@
-﻿namespace Kiiwi;
+﻿using FFImageLoading.Maui;
+namespace Kiiwi;
 
 public partial class MainPage : ContentPage
 {

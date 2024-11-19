@@ -1,24 +1,40 @@
+using FFImageLoading.Maui;
+
 namespace Kiiwi;
 public delegate void Callback();
 public class Player : Animacao
+
 {
-    public Player (Image a) : base (a)
+    public Player (CachedImageView a) : base (a)
     {
         for (int i = 1; i <= 6; i++)
-            animacao1.Add ($"bicho{i.ToString("D2")}.png");
+            Animacao1.Add ($"bicho{i.ToString("D2")}.png");
         // for (int i = 1; i <= ; i++)
         //     animacao2.Add ($"{i.ToString("D2")}.png");
         SetAnimacaoAtiva(1);
     }
     public void Die()
     {
-        loop = false;
-        // SetAnimacaoAtiva(2);
+        Loop = false;
+        
     }
     public void Run()
     {
-        loop=true;
+        Loop=true;
         SetAnimacaoAtiva(1);
         Play();
     }
+    public void MoveY (int s)
+     {
+        ImageView.TranslationY += s;
+     }
+     public double GetY()
+     {
+        return ImageView.TranslationY;
+     }
+
+     public void SetY(double a)
+     {
+        ImageView.TranslationY=a;
+     }
 }
