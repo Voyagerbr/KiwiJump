@@ -11,11 +11,11 @@ public  class Animacao
     protected int AnimacaoAtiva = 1;
     bool Parado = true;
     int FrameAtual = 1;
-    protected CachedImageView ImageView;
+    protected CachedImageView compImage;
 
     public Animacao(CachedImageView pp)
     {
-        ImageView = pp;
+        compImage = pp;
     }
 
     public void Stop()
@@ -58,7 +58,7 @@ public  class Animacao
             TamanhoAnimacao = Animacao3.Count;
         }
 
-        ImageView.Source = ImageSource.FromFile(NomeArquivo);
+        compImage.Source = ImageSource.FromFile(NomeArquivo);
         FrameAtual++;
 
         if (FrameAtual >= TamanhoAnimacao)

@@ -2,10 +2,18 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Kiiwi.MainPage"
-             xmlns:FF="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
+             xmlns:ff="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
              Shell.NavBarIsVisible="False">
 
     <Grid>
+        <ff:CachedImage x:Name="obrabo"
+                Source="bicho01.png"
+                CacheType="Disk"
+                CacheDuration="365"
+                HorizontalOptions="Center"
+                VerticalOptions="Center" />
+
+
         <HorizontalStackLayout x:Name="layerFundo1">
                 <Image Source="fundo01.png"
                         Aspect="AspectFill"/>
@@ -42,12 +50,7 @@
                        VerticalOptions="End"/>
         </HorizontalStackLayout>
         
-        <FF:CachedImageView x:Name="imgpersonagem"
-        Source="bicho01"
-        CacheType="Disk"
-        CacheDuration="365"
-        HorizontalOptions="Center"
-        VerticalOptions="Center"/>
+        
 
     </Grid>
 </ContentPage>

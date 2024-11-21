@@ -1,4 +1,4 @@
-﻿using FFImageLoading.Maui;
+﻿
 namespace Kiiwi;
 
 public partial class MainPage : ContentPage
@@ -30,7 +30,7 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
 		InitializeComponent();
-		player = new Player(imgpersonagem);
+		player = new Player(obrabo);
 		player.Run();
 	}
 
@@ -102,7 +102,8 @@ public partial class MainPage : ContentPage
 	void GerenciaCenario(HorizontalStackLayout hsl)
 	{
 		var view = (hsl.Children.First() as Image);
-		if(view.WidthRequest+hsl.TranslationX<0)
+
+		if(view.WidthRequest+hsl.TranslationX < 0)
 		{
 			hsl.Children.Remove(view);
 			hsl.Children.Add(view);
